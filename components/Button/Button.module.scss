@@ -1,0 +1,64 @@
+.button {
+	display: inline-block;
+	padding: 10px;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+.primary {
+	color: var(--white);
+	background-color: var(--primary);
+	transition: var(--transition);
+
+	&:hover {
+		background-color: var(--primary-hover);
+	}
+
+	.arrow {
+		svg {
+			fill: var(--white);
+		}
+	}
+}
+
+.ghost {
+	color: var(--black);
+	background: none;
+	border: 1px solid var(--gray-light);
+	transition: var(--transition);
+
+	&:hover {
+		color: var(--white);
+		background-color: var(--primary);
+
+		.arrow {
+			svg {
+				fill: var(--white);
+			}
+		}
+	}
+
+	.arrow {
+		svg {
+			fill: var(--black);
+		}
+	}
+}
+
+.arrow {
+	display: inline-block;
+	margin-left: 10px;
+
+	svg {
+		height: 10px;
+		fill: var(--white);
+	}
+}
+
+.down {
+	transform: rotate(90deg);
+	transition: var(--transition);
+}
