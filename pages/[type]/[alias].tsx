@@ -1,20 +1,18 @@
 import axios from 'axios';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { useState } from 'react';
 import { firstLevelMenu } from '../../helpers/helpers';
 import { MenuItem } from '../../interfaces/menu.interface';
 import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { withLayout } from '../../layout/Layout';
+import { PageComponent } from '../../page-components';
 
-const firstCategory = 0;
-
-function Course({ menu, page, products }: CourseProps): JSX.Element {
-	return <>{products && products.length}</>;
+function Page({ firstCategory, page, products }: CourseProps): JSX.Element {
+	return <PageComponent firstCategory={firstCategory} page={page} products={products} />;
 }
 
-export default withLayout(Course);
+export default withLayout(Page);
 
 export const getStaticPaths: GetStaticPaths = async () => {
 	let paths: string[] = [];
@@ -45,7 +43,7 @@ export const getStaticProps: GetStaticProps<CourseProps> = async ({
 			firstCategory: firstCategoryItem.id,
 		});
 		if (menu.length == 0) return { notFound: true };
-		
+
 		const { data: page } = await axios.get<PageModel>(
 			process.env.NEXT_PUBLIC_DOMAIN + '/api/page/byAlias/' + params.alias
 		);

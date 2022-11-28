@@ -1,6 +1,6 @@
 .wrapper {
 	display: grid;
-	grid-template-columns: auto 320px minmax(320px, 1200px) auto;
+	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
 	grid-template-rows: auto 1fr auto;
 	min-height: 100vh;
 	gap: 0 30px;
@@ -36,11 +36,11 @@
 			'footer';
 	}
 
-	.sidebar {
-		display: none;
-	}
-
 	.header {
 		display: block;
+	}
+
+	.sidebar {
+		display: none!important;
 	}
 }
