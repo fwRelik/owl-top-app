@@ -1,5 +1,5 @@
 .wrapper {
-	margin-top: 40px;
+	margin: 40px 0;
 
 	.title {
 		display: grid;
@@ -12,6 +12,25 @@
 		display: grid;
 		grid-template-columns: auto 1fr;
 		place-items: center left;
-        gap: 20px;
+		gap: 20px;
+	}
+
+	.seo {
+		h1 {
+			font-size: 26px;
+			line-height: 35px;
+		}
+
+		h2 {
+			font-size: 22px;
+			margin-top: 50px;
+			line-height: 30px;
+		}
+
+		h3 {
+			font-weight: 700;
+			font-size: 20px;
+			line-height: 27px;
+		}
 	}
 }
