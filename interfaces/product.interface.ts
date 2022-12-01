@@ -21,7 +21,7 @@ export interface ProductModel {
 	price: number;
 	oldPrice: number;
 	credit: number;
-	caclulatedRating: number;
+	calculatedRating: number;
 	description: string;
 	advantages: string;
 	disAdvantages: string;
