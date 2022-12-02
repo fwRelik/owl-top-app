@@ -4,10 +4,6 @@
 	margin-bottom: 30px;
 	padding: 30px;
 
-	.imageNotFound {
-		width: 40px;
-	}
-
 	.logo {
 		grid-column: start / logoend;
 		grid-row: 1 / span 2;
@@ -45,5 +41,100 @@
 
 	.advBlock {
 		grid-column: middle / end;
+	}
+
+	.advBlock {
+		font-size: 16px;
+
+		.advTitle {
+			font-weight: 700;
+			margin-bottom: 5px;
+		}
+
+		.advantages {
+			border-left: 3px solid var(--green);
+			padding-left: 15px;
+			margin-bottom: 20px;
+		}
+
+		.disAdvantages {
+			border-left: 3px solid var(--orange);
+			padding-left: 15px;
+		}
+	}
+
+	.logo {
+		.imageNotFound,
+		img {
+			width: 70px;
+			height: 70px;
+			border-radius: 5px;
+			object-fit: cover;
+			object-position: top;
+		}
+	}
+
+	.title {
+		font-weight: 600;
+		font-size: 20px;
+		align-self: flex-end;
+	}
+
+	.price,
+	.credit {
+		font-size: 20px;
+		align-self: flex-end;
+
+		.month {
+			font-size: 14px;
+		}
+
+		.oldPrice {
+			margin-left: 5px;
+		}
+	}
+
+	.rating {
+		align-self: flex-end;
+	}
+
+	.priceTitle,
+	.creditTitle,
+	.rateTitle {
+		font-weight: 300;
+		font-size: 14px;
+	}
+
+	.category {
+		margin-top: 7px;
+	}
+
+	.description {
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.reviewButton {
+		margin-left: 20px;
+	}
+
+	.characteristics {
+		display: grid;
+		align-items: baseline;
+		grid-template-columns: auto 1fr auto;
+		gap: 10px;
+		padding-right: 60px;
+		margin-bottom: 10px;
+
+		.characteristicsName,
+		.characteristicsValue {
+			font-size: 16px;
+			font-weight: 700;
+		}
+
+		.characteristicsDots {
+			border-bottom: 1px dashed var(--gray-light);
+
+		}
 	}
 }

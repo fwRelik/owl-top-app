@@ -2,6 +2,16 @@
 const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'http',
+				hostname: '*',
+				port: '3000',
+				pathname: '/static/**',
+			},
+		],
+	},
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/i,
