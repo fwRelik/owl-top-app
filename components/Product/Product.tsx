@@ -50,11 +50,16 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 				<Rating rating={product.reviewAvg ?? product.calculatedRating} />
 			</div>
 			<div className={styles.tags}>
-				{product.tags.map(c => (
+				{
+					<Tag className={styles.category} color={'ghost'}>
+						{product.tags[0]}
+					</Tag>
+				}
+				{/* {product.tags.map(c => (
 					<Tag key={c} className={styles.category} color={'ghost'}>
 						{c}
 					</Tag>
-				))}
+				))} */}
 			</div>
 			<div className={styles.priceTitle}>цена</div>
 			<div className={styles.creditTitle}>кредит</div>
@@ -78,8 +83,8 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 			</div>
 			<Divider className={styles.hr} />
 			<div className={styles.actions}>
-				<Button appearance={'primary'}>Узнать подробнее</Button>
-				<Button className={styles.reviewButton} appearance={'ghost'} arrow={'right'}>
+				<Button className={styles.reviewButton} appearance={'primary'}>Узнать подробнее</Button>
+				<Button appearance={'ghost'} arrow={'right'}>
 					Читать отзывы
 				</Button>
 			</div>
