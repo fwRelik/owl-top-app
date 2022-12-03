@@ -46,7 +46,14 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 			</Button>
 		) : null;
 
-	const reviews = product.reviews ? product.reviews.map(r => <Review key={r._id} review={r} />) : null;
+	const reviews = product.reviews
+		? product.reviews.map(r => (
+				<>
+					<Review key={r._id} review={r} />
+					<Divider />
+				</>
+		  ))
+		: null;
 
 	return (
 		<>
