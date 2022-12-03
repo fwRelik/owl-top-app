@@ -1,7 +1,10 @@
 import { TextareaProps } from './Textarea.props';
 import styles from './Textarea.module.scss';
 import cn from 'classnames';
+import { ForwardedRef, forwardRef } from 'react';
 
-export const Textarea = ({ className, ...props }: TextareaProps): JSX.Element => {
-	return <textarea className={cn(styles.textarea, className)} {...props} />;
-};
+export const Textarea = forwardRef(
+	({ className, ...props }: TextareaProps, ref: ForwardedRef<HTMLTextAreaElement>): JSX.Element => {
+		return <textarea className={cn(styles.textarea, className)} ref={ref} {...props} />;
+	}
+);
