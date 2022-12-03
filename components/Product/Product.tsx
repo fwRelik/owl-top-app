@@ -49,10 +49,10 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 
 	const reviews = product.reviews
 		? product.reviews.map(r => (
-				<>
-					<Review key={r._id} review={r} />
+				<div key={r._id}>
+					<Review review={r} />
 					<Divider />
-				</>
+				</div>
 		  ))
 		: null;
 
