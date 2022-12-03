@@ -26,7 +26,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
 	};
 
 	return (
-		<div className={cn(className, styles.search)} {...props}>
+		<div className={cn(styles.search, className)} {...props}>
 			<Input
 				className={styles.input}
 				placeholder={'Поиск...'}
