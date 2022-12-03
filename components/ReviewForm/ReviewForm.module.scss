@@ -1,0 +1,91 @@
+.reviewForm {
+	font-size: 14px;
+	display: grid;
+	grid-template-columns: [start] auto 1fr auto [end];
+	gap: 20px 30px;
+
+	.input {
+		&.title {
+			justify-self: left;
+		}
+	}
+
+	.rating {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		white-space: nowrap;
+	}
+
+	.description,
+	.submit {
+		grid-column: start / end;
+	}
+
+	.submit {
+		display: flex;
+		gap: 15px;
+		align-items: center;
+	}
+}
+
+.success {
+	background: var(--green-light);
+	padding: 20px;
+	position: relative;
+	border-radius: 5px;
+	margin-top: 20px;
+
+	.successTitle {
+		font-weight: 700;
+	}
+
+	.close {
+		width: 12px;
+		height: 12px;
+		fill: var(--crayola);
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		cursor: pointer;
+	}
+}
+
+@media screen and (max-width: 1200px) {
+	.reviewForm {
+		grid-template-columns: [start] auto 1fr [end];
+	}
+
+	.success {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 940px) {
+	.reviewForm {
+		grid-template-columns: [start] auto auto [end];
+
+		.input {
+			justify-self: left;
+			&.title {
+				grid-row: 2/3;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.reviewForm {
+		grid-template-columns: [start] auto [end];
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.reviewForm {
+		.submit {
+			& > .button {
+				align-self: flex-start;
+			}
+		}
+	}
+}

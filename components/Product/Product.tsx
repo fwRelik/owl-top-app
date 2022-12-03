@@ -12,6 +12,7 @@ import { Divider } from '../Divider/Divider';
 import styles from './Product.module.scss';
 import ImageNotFound from '../../public/images/img_not_found.png';
 import { Review } from '../Review/Review';
+import { ReviewForm } from '../ReviewForm/ReviewForm';
 
 export const Product = ({ product, children, className, ...props }: ProductProps): JSX.Element => {
 	const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
@@ -121,6 +122,7 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 					[styles.closed]: !isReviewOpened,
 				})}>
 				{reviews}
+				<ReviewForm productId={'qwe'} />
 			</Card>
 		</>
 	);
