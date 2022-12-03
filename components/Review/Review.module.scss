@@ -1,0 +1,64 @@
+.review {
+	display: grid;
+	grid-template-columns: [start] auto [hentai] 1fr auto auto [end];
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 20px;
+
+	font-size: 14px;
+
+	.userIcon {
+		fill: var(--primary);
+		width: 30px;
+		height: 30px;
+	}
+
+	.description {
+		grid-column: start / end;
+	}
+
+	.date {
+		margin-right: 10px;
+	}
+
+	.name {
+		font-weight: 700;
+		margin-right: 10px;
+	}
+
+	.rating {
+		white-space: nowrap;
+	}
+}
+
+@media screen and (max-width: 940px) {
+	.review {
+		grid-template-columns: [start] 30px [titlestart] auto [dateend] 1fr [end];
+		gap: 15px;
+		margin-bottom: 30px;
+
+		.title {
+			grid-column: titlestart / end;
+		}
+
+		.date {
+			grid-column: start / dateend;
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.review {
+		grid-template-columns: [start] 30px [titlestart] auto [dateend] 1fr [end];
+		gap: 15px;
+		margin-bottom: 30px;
+
+		.rating {
+			grid-column: start / end;
+		}
+
+		.date {
+			grid-row: 3/4;
+		}
+	}
+}
