@@ -1,10 +1,10 @@
-import { Advantages, HhData, Htag, P, Product, Sort, Tag } from '../../components';
+import { Advantages, HhData, Htag, Product, Sort, Tag } from '../../components';
 import { PageComponentProps } from './PageComponent.props';
-import styles from './PageComponent.module.scss';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import { useReducer } from 'react';
 import { sortReducer } from './sort.reducer';
 import { SortEnum } from '../../components/Sort/Sort.props';
+import styles from './PageComponent.module.scss';
 
 export const PageComponent = ({ page, products, firstCategory }: PageComponentProps): JSX.Element => {
 	const [{ products: sortedProducts, sort }, dispathSort] = useReducer(sortReducer, {

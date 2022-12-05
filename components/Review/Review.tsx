@@ -3,7 +3,6 @@ import cn from 'classnames';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { Rating } from '../Rating/Rating';
-
 import styles from './Review.module.scss';
 import UserIcon from './icons/user.svg';
 

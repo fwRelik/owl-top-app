@@ -3,5 +3,5 @@ import styles from './Divider.module.scss';
 import cn from 'classnames';
 
 export const Divider = ({ className, ...props }: DividerProps): JSX.Element => {
-	return <hr className={cn(styles.hr, className)} {...props}/>
+	return <hr className={cn(styles.hr, className)} {...props} />;
 };

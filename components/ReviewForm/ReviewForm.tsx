@@ -1,14 +1,13 @@
 import { ReviewFormProps } from './ReviewForm.props';
-import cn from 'classnames';
-import styles from './ReviewForm.module.scss';
 import { Textarea } from '../Textarea/Textarea';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { Rating } from '../Rating/Rating';
 import { Controller, useForm } from 'react-hook-form';
-
-import XmarkIcon from './icons/xmark.svg';
 import { IReviewForm } from './ReviewForm.interface';
+import cn from 'classnames';
+import styles from './ReviewForm.module.scss';
+import XmarkIcon from './icons/xmark.svg';
 
 export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Element => {
 	const {

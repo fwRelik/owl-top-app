@@ -1,11 +1,10 @@
 import { LayoutProps } from './Layout.props';
-import styles from './Layout.module.scss';
-import cn from 'classnames';
 import { Header } from './Header/Header';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
 import { FunctionComponent } from 'react';
 import { AppContextProvider, IAppContext } from '../context/app.context';
+import styles from './Layout.module.scss';
 
 const Layout = ({ children }: LayoutProps): JSX.Element => {
 	return (

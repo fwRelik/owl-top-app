@@ -2,10 +2,9 @@ import { AppContext } from '../../context/app.context';
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import cn from 'classnames';
 import { FirstLevelMenuItem, PageItem } from '../../interfaces/menu.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
-
+import cn from 'classnames';
 import styles from './Menu.module.scss';
 
 export const Menu = (): JSX.Element => {

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import cn from 'classnames';
 import { ProductProps } from './Product.props';
 import { Card } from '../Card/Card';
 import { Rating } from '../Rating/Rating';
@@ -8,14 +7,16 @@ import { Tag } from '../Tag/Tag';
 import { Button } from '../Button/Button';
 import { declOfNum, priceRu } from '../../helpers/helpers';
 import { Divider } from '../Divider/Divider';
-
-import styles from './Product.module.scss';
-import ImageNotFound from '../../public/images/img_not_found.png';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
+import { API } from '../../helpers/api';
+import cn from 'classnames';
+import styles from './Product.module.scss';
+import ImageNotFound from '../../public/images/img_not_found.png';
 
 export const Product = ({ product, children, className, ...props }: ProductProps): JSX.Element => {
 	const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
+	const [imageShow, setImageShow] = useState(true);
 
 	const advantages = product.advantages ? (
 		<div className={styles.advantages}>
@@ -31,11 +32,18 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 		</div>
 	) : null;
 
-	const image = product.image ? (
-		<Image src={process.env.NEXT_PUBLIC_DOMAIN_FOLDER + product.image} alt={product.title} width={70} height={70} />
-	) : (
-		<Image src={ImageNotFound} alt={product.title} width={70} height={70} />
-	);
+	const image =
+		product.image && imageShow ? (
+			<Image
+				src={API.domain.assets_folder + product.image}
+				onError={() => setImageShow(false)}
+				alt={product.title}
+				width={70}
+				height={70}
+			/>
+		) : (
+			<Image src={ImageNotFound} alt={product.title} width={70} height={70} />
+		);
 
 	const reviewButton =
 		product.reviews.length > 0 ? (
@@ -76,16 +84,11 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 					<Rating rating={product.reviewAvg ?? product.calculatedRating} />
 				</div>
 				<div className={styles.tags}>
-					{
-						<Tag className={styles.category} color={'ghost'}>
-							{product.tags[0]}
+					{product.tags.map(c => (
+						<Tag key={c} className={styles.category} color={'ghost'}>
+							{c}
 						</Tag>
-					}
-					{/* {product.tags.map(c => (
-					<Tag key={c} className={styles.category} color={'ghost'}>
-						{c}
-					</Tag>
-				))} */}
+					))}
 				</div>
 				<div className={styles.priceTitle}>цена</div>
 				<div className={styles.creditTitle}>кредит</div>
