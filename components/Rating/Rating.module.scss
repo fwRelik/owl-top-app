@@ -1,11 +1,11 @@
 .rating {
 	position: relative;
 	display: flex;
-	gap: 5px;
 	margin-bottom: 5px;
 
 	.star {
 		height: 20px;
+		padding: 0px 2.5px;
 		fill: var(--mercury);
 
 		&.filled {
