@@ -29,25 +29,40 @@
 	}
 }
 
-.success {
-	background: var(--green-light);
+.statusMessage {
 	padding: 20px;
 	position: relative;
 	border-radius: 5px;
 	margin-top: 20px;
 
-	.successTitle {
+	& > .title {
 		font-weight: 700;
+		margin-bottom: 5px;
 	}
 
-	.close {
+	& > .close {
 		width: 12px;
 		height: 12px;
-		fill: var(--crayola);
 		position: absolute;
 		top: 15px;
 		right: 15px;
 		cursor: pointer;
+	}
+
+	&.success {
+		background: var(--green-light);
+
+		.close {
+			fill: var(--crayola);
+		}
+	}
+
+	&.error {
+		background: var(--red-light);
+
+		.close {
+			fill: var(--rose);
+		}
 	}
 }
 

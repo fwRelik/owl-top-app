@@ -9,14 +9,14 @@ import { declOfNum, priceRu } from '../../helpers/helpers';
 import { Divider } from '../Divider/Divider';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
-import { API } from '../../helpers/api';
+import { API } from '../../configs/api.config';
 import cn from 'classnames';
 import styles from './Product.module.scss';
 import ImageNotFound from '../../public/images/img_not_found.png';
 
 export const Product = ({ product, children, className, ...props }: ProductProps): JSX.Element => {
 	const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
-	const [imageShow, setImageShow] = useState(true);
+	const [imageShow, setImageShow] = useState<boolean>(true);
 
 	const advantages = product.advantages ? (
 		<div className={styles.advantages}>
@@ -44,16 +44,6 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 		) : (
 			<Image src={ImageNotFound} alt={product.title} width={70} height={70} />
 		);
-
-	const reviewButton =
-		product.reviews.length > 0 ? (
-			<Button
-				onClick={() => setIsReviewOpened(!isReviewOpened)}
-				appearance={'ghost'}
-				arrow={isReviewOpened ? 'down' : 'right'}>
-				Читать отзывы
-			</Button>
-		) : null;
 
 	const reviews = product.reviews
 		? product.reviews.map(r => (
@@ -115,7 +105,12 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 					<Button className={styles.reviewButton} appearance={'primary'}>
 						Узнать подробнее
 					</Button>
-					{reviewButton}
+					<Button
+						onClick={() => setIsReviewOpened(!isReviewOpened)}
+						appearance={'ghost'}
+						arrow={isReviewOpened ? 'down' : 'right'}>
+						Читать отзывы
+					</Button>
 				</div>
 			</Card>
 			<Card
@@ -125,7 +120,7 @@ export const Product = ({ product, children, className, ...props }: ProductProps
 					[styles.closed]: !isReviewOpened,
 				})}>
 				{reviews}
-				<ReviewForm productId={'qwe'} />
+				<ReviewForm productId={product._id} />
 			</Card>
 		</>
 	);

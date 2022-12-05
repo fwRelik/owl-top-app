@@ -13,7 +13,8 @@ export const Review = ({ review, className, ...props }: ReviewProps): JSX.Elemen
 			<UserIcon className={styles.userIcon} />
 			<div className={styles.title}>
 				<span className={styles.name}>{name}:</span>
-				<span>{title}</span>
+				<span>{title}</span> <br />
+				<span>id: {review._id}</span>
 			</div>
 			<div className={styles.date}>{format(new Date(createdAt), 'dd MMMM yyyy', { locale: ru })}</div>
 			<div className={styles.rating}>

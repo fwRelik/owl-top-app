@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { GetStaticProps } from 'next';
 import { Input, Textarea } from '../components';
-import { API } from '../helpers/api';
+import { API } from '../configs/api.config';
 import { MenuItem } from '../interfaces/menu.interface';
 import { withLayout } from '../layout/Layout';
 

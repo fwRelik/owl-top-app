@@ -4,45 +4,68 @@ import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import { Rating } from '../Rating/Rating';
 import { Controller, useForm } from 'react-hook-form';
-import { IReviewForm } from './ReviewForm.interface';
+import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface';
 import cn from 'classnames';
 import styles from './ReviewForm.module.scss';
 import XmarkIcon from './icons/xmark.svg';
+import axios from 'axios';
+import { useState } from 'react';
+import { API, formConfig, responseConfig } from '../../configs';
 
 export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Element => {
+	const { success, failed } = responseConfig; // getting responses from config file
 	const {
 		register,
 		control,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm<IReviewForm>();
+	const [isSuccess, setIsSuccess] = useState<boolean>(false);
+	const [error, setError] = useState<string>();
 
-	const onSubmit = (data: IReviewForm) => {
-		console.log(data);
+	const onSubmit = async (formData: IReviewForm) => {
+		try {
+			const { data } = await axios.post<IReviewSentResponse>(API.review.create, { ...formData, productId });
+			if (data._id) {
+				setIsSuccess(true);
+				setError(undefined);
+				reset();
+			} else {
+				setIsSuccess(false);
+				setError(failed.description);
+			}
+		} catch (e: any) {
+			setIsSuccess(false);
+			setError(failed.description);
+		}
 	};
 
-	const errorConfig = {
-		name: { required: { value: true, message: 'Введите имя' } },
-		title: { required: { value: true, message: 'Введите заголовок' } },
-		description: { required: { value: true, message: 'Введите описание' } },
-		rating: { required: { value: true, message: 'Укажите рейтинг' } },
-	};
-
-	const validateRating = (value: number) => {
-		return !!value;
-	};
+	const requestMessage = isSuccess ? (
+		<div className={cn(styles.statusMessage, styles.success)}>
+			<div className={styles.title}>{success.title}</div>
+			<div>{success.description}</div>
+			<XmarkIcon className={styles.close} onClick={() => setIsSuccess(false)} />
+		</div>
+	) : error ? (
+		<div className={cn(styles.statusMessage, styles.error)}>
+			<div className={styles.title}>{failed.title}</div>
+			<div>{failed.description}</div>
+			<XmarkIcon className={styles.close} onClick={() => setError(undefined)} />
+		</div>
+	) : null;
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className={cn(styles.reviewForm, className)}>
 				<Input
-					{...register('name', errorConfig.name)}
+					{...register('name', formConfig.name)}
 					error={errors.name}
 					placeholder={'Имя'}
 					className={cn(styles.input, styles.name)}
 				/>
 				<Input
-					{...register('title', errorConfig.title)}
+					{...register('title', formConfig.title)}
 					error={errors.title}
 					placeholder={'Заголовок отзыва'}
 					className={cn(styles.input, styles.title)}
@@ -52,14 +75,14 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 					<Controller
 						control={control}
 						name='rating'
-						rules={errorConfig.rating}
+						rules={formConfig.rating}
 						render={({ field: { value, ref, onChange } }) => (
 							<Rating isEditable rating={value} ref={ref} error={errors.rating} setRating={onChange} />
 						)}
 					/>
 				</div>
 				<Textarea
-					{...register('description', errorConfig.description)}
+					{...register('description', formConfig.description)}
 					error={errors.description}
 					placeholder={'Текст отзыва'}
 					className={styles.description}
@@ -71,11 +94,7 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 					<span>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
 				</div>
 			</div>
-			<div className={styles.success}>
-				<div className={styles.successTitle}>Ваш отзыв отправлен</div>
-				<div>Спасибо, ваш отзыв будет опубликован после проверки.</div>
-				<XmarkIcon className={styles.close} />
-			</div>
+			{requestMessage}
 		</form>
 	);
 };
