@@ -112,6 +112,14 @@
 		font-size: 14px;
 	}
 
+	.rateTitle {
+		span {
+			color: var(--primary);
+			font-weight: 500;
+			cursor: pointer;
+		}
+	}
+
 	.category {
 		margin-top: 7px;
 	}
