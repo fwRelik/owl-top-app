@@ -12,6 +12,8 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 		sort: SortEnum.Rating,
 	});
 
+	if (!page) return <div>Not Found Error...</div>; // crutch for temporary complete assembly
+
 	useEffect(() => {
 		dispathSort({ type: 'reset', payload: products });
 	}, [page]);
@@ -55,3 +57,4 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 		</div>
 	);
 };
+

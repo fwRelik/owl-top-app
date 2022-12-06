@@ -14,6 +14,6 @@ export const API = {
 		find: u('/api/product/find/'),
 	},
 	review: {
-		create: u('/api/review/create'),
+		create: u('/api/review/create/'),
 	},
 };
