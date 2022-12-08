@@ -30,6 +30,17 @@ export const Product = motion(
 				}, 100);
 			};
 
+			const variants = {
+				close: {
+					opacity: '0',
+					height: '0',
+				},
+				open: {
+					opacity: '1',
+					height: 'auto',
+				},
+			};
+
 			const advantages = product.advantages ? (
 				<div className={styles.advantages}>
 					<div className={styles.advTitle}>Преимущества</div>
@@ -127,23 +138,18 @@ export const Product = motion(
 							</Button>
 						</div>
 					</Card>
-					<Card
-						// layout
-						variants={{
-							close: { height: '0px', padding: '0px 30px', overflow: 'hidden' },
-							open: { height: 'auto', padding: '30px 30px', overflow: 'visible' },
-						}} 
-						initial={'close'}
-						animate={isReviewOpened ? 'open' : 'close'}
-						color='blue'
-						ref={reviewRef}
-						className={cn(styles.reviews, {
-							[styles.opened]: isReviewOpened,
-							[styles.closed]: !isReviewOpened,
-						})}>
-						{reviews}
-						<ReviewForm productId={product._id} />
-					</Card>
+					<motion.div variants={variants} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
+						<Card
+							color='blue'
+							ref={reviewRef}
+							className={cn(styles.reviews, {
+								[styles.opened]: isReviewOpened,
+								[styles.closed]: !isReviewOpened,
+							})}>
+							{reviews}
+							<ReviewForm productId={product._id} />
+						</Card>
+					</motion.div>
 				</div>
 			);
 		}
