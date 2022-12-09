@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef, MouseEventHandler, useRef, useState } from 'react';
+import { ForwardedRef, forwardRef, KeyboardEvent, MouseEventHandler, useRef, useState } from 'react';
 import Image from 'next/image';
 import { ProductProps } from './Product.props';
 import { Card } from '../Card/Card';
@@ -13,6 +13,7 @@ import { API } from '../../configs/api.config';
 import { motion } from 'framer-motion';
 import styles from './Product.module.scss';
 import ImageNotFound from '../../public/images/img_not_found.png';
+import { useKeyDownEvent } from '../../hooks/useKeyDownEvent';
 
 export const Product = motion(
 	forwardRef(
@@ -20,6 +21,7 @@ export const Product = motion(
 			const [isReviewOpened, setIsReviewOpened] = useState<boolean>(false);
 			const [imageShow, setImageShow] = useState<boolean>(true);
 			const reviewRef = useRef<HTMLDivElement>(null);
+			const { skipDefEvent } = useKeyDownEvent();
 
 			const scrollToReview = () => {
 				setIsReviewOpened(true);
@@ -99,7 +101,10 @@ export const Product = motion(
 						<div className={styles.priceTitle}>цена</div>
 						<div className={styles.creditTitle}>кредит</div>
 						<div className={styles.rateTitle}>
-							<span tabIndex={0} onClick={scrollToReview}>
+							<span
+								tabIndex={0}
+								onClick={scrollToReview}
+								onKeyDown={key => skipDefEvent(key, { scrollToReview })}>
 								{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
 							</span>
 						</div>

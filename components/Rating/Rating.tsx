@@ -3,6 +3,7 @@ import { RatingProps } from './Rating.props';
 import styles from './Rating.module.scss';
 import cn from 'classnames';
 import StarIcon from '../../public/icons/star.svg';
+import { useKeyDownEvent } from '../../hooks/useKeyDownEvent';
 
 export const Rating = forwardRef(
 	(
@@ -10,6 +11,7 @@ export const Rating = forwardRef(
 		ref: ForwardedRef<HTMLDivElement>
 	): JSX.Element => {
 		const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(null));
+		const { skipDefEvent } = useKeyDownEvent();
 
 		useEffect(() => {
 			constructRating(rating);
@@ -28,7 +30,10 @@ export const Rating = forwardRef(
 						onMouseLeave={() => changeDisplay(rating)}
 						onClick={() => onClick(i + 1)}
 						tabIndex={isEditable ? 0 : -1}
-						onKeyDown={(e: KeyboardEvent<SVGAElement>) => handleSpace(i + 1, e)}
+						onKeyDown={(e: KeyboardEvent<SVGAElement>) => {
+							handleSpace(i + 1, e);
+							skipDefEvent(e);
+						}}
 					/>
 				);
 			});

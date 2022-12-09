@@ -7,10 +7,12 @@ import { firstLevelMenu } from '../../helpers/helpers';
 import cn from 'classnames';
 import styles from './Menu.module.scss';
 import { motion } from 'framer-motion';
+import { useKeyDownEvent } from '../../hooks/useKeyDownEvent';
 
 export const Menu = (): JSX.Element => {
 	const { menu, setMenu, firstCategory } = useContext(AppContext);
 	const router = useRouter();
+	const { skipDefEvent } = useKeyDownEvent();
 
 	const variants = {
 		visible: {
@@ -38,13 +40,6 @@ export const Menu = (): JSX.Element => {
 					return m;
 				})
 			);
-	};
-
-	const openSecondLevelKey = (key: KeyboardEvent, secondCategory: string) => {
-		if (key.code == 'Space' || key.code == 'Enter') {
-			key.preventDefault();
-			openSecondLevel(secondCategory);
-		}
 	};
 
 	const buildFirstLevel = () => {
@@ -77,7 +72,9 @@ export const Menu = (): JSX.Element => {
 						<div key={m._id.secondCategory}>
 							<div
 								tabIndex={0}
-								onKeyDown={(key: KeyboardEvent) => openSecondLevelKey(key, m._id.secondCategory)}
+								onKeyDown={(key: KeyboardEvent) =>
+									skipDefEvent(key, { cb: () => openSecondLevel(m._id.secondCategory) })
+								}
 								className={styles.secondLevel}
 								onClick={() => openSecondLevel(m._id.secondCategory)}>
 								<span className={styles.notSelect}>{m._id.secondCategory}</span>
@@ -102,6 +99,7 @@ export const Menu = (): JSX.Element => {
 			<motion.div layout variants={variantsChildren} key={p._id}>
 				<Link
 					tabIndex={isOpened ? 0 : -1}
+					onKeyDown={skipDefEvent}
 					href={`/${route}/${p.alias}`}
 					className={cn(styles.thirdLevel, {
 						[styles.thirdLevelActive]: `/${route}/${p.alias}` == router.asPath,
