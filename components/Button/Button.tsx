@@ -1,7 +1,7 @@
 import { ButtonProps } from './Button.props';
 import cn from 'classnames';
 import styles from './Button.module.scss';
-import ArrowIcon from './icons/chevron.svg';
+import ArrowIcon from '../../public/icons/chevron.svg';
 
 export const Button = ({
 	appearance = 'primary',

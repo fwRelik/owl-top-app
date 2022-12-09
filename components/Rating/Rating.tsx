@@ -2,7 +2,7 @@ import { ForwardedRef, forwardRef, KeyboardEvent, useEffect, useState } from 're
 import { RatingProps } from './Rating.props';
 import styles from './Rating.module.scss';
 import cn from 'classnames';
-import StarIcon from './icons/star.svg';
+import StarIcon from '../../public/icons/star.svg';
 
 export const Rating = forwardRef(
 	(

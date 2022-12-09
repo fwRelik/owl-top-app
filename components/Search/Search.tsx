@@ -5,7 +5,7 @@ import { KeyboardEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import cn from 'classnames';
 import styles from './Search.module.scss';
-import SearchIcon from './icons/search.svg';
+import SearchIcon from '../../public/icons/search.svg';
 
 
 export const Search = ({ className, ...props }: SearchProps): JSX.Element => {

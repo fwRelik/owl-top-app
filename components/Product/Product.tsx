@@ -10,10 +10,9 @@ import { Divider } from '../Divider/Divider';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
 import { API } from '../../configs/api.config';
-import cn from 'classnames';
+import { motion } from 'framer-motion';
 import styles from './Product.module.scss';
 import ImageNotFound from '../../public/images/img_not_found.png';
-import { motion } from 'framer-motion';
 
 export const Product = motion(
 	forwardRef(
@@ -30,15 +29,9 @@ export const Product = motion(
 				}, 100);
 			};
 
-			const variants = {
-				close: {
-					opacity: '0',
-					height: '0',
-				},
-				open: {
-					opacity: '1',
-					height: 'auto',
-				},
+			const variantsCard = {
+				close: { opacity: 0, height: 0 },
+				open: { opacity: 1, height: 'auto' },
 			};
 
 			const advantages = product.advantages ? (
@@ -138,14 +131,8 @@ export const Product = motion(
 							</Button>
 						</div>
 					</Card>
-					<motion.div variants={variants} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
-						<Card
-							color='blue'
-							ref={reviewRef}
-							className={cn(styles.reviews, {
-								[styles.opened]: isReviewOpened,
-								[styles.closed]: !isReviewOpened,
-							})}>
+					<motion.div variants={variantsCard} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
+						<Card color='blue' ref={reviewRef} className={styles.reviews}>
 							{reviews}
 							<ReviewForm productId={product._id} />
 						</Card>

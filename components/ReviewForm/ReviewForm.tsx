@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { ReviewFormProps } from './ReviewForm.props';
 import { Textarea } from '../Textarea/Textarea';
 import { Input } from '../Input/Input';
@@ -5,12 +6,11 @@ import { Button } from '../Button/Button';
 import { Rating } from '../Rating/Rating';
 import { Controller, useForm } from 'react-hook-form';
 import { IReviewForm, IReviewSentResponse } from './ReviewForm.interface';
-import cn from 'classnames';
-import styles from './ReviewForm.module.scss';
-import XmarkIcon from './icons/xmark.svg';
-import axios from 'axios';
 import { useState } from 'react';
 import { API, formConfig, responseConfig } from '../../configs';
+import cn from 'classnames';
+import styles from './ReviewForm.module.scss';
+import XmarkIcon from '../../public/icons/xmark.svg';
 
 export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Element => {
 	const { success, failed } = responseConfig; // getting responses from config file
