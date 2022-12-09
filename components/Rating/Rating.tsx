@@ -13,7 +13,7 @@ export const Rating = forwardRef(
 
 		useEffect(() => {
 			constructRating(rating);
-		}, [rating]);
+		}, [rating, isEditable]);
 
 		const constructRating = (currentRating: number) => {
 			const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {

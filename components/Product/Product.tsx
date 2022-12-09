@@ -99,7 +99,7 @@ export const Product = motion(
 						<div className={styles.priceTitle}>цена</div>
 						<div className={styles.creditTitle}>кредит</div>
 						<div className={styles.rateTitle}>
-							<span onClick={scrollToReview}>
+							<span tabIndex={0} onClick={scrollToReview}>
 								{product.reviewCount} {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
 							</span>
 						</div>
@@ -134,7 +134,7 @@ export const Product = motion(
 					<motion.div variants={variantsCard} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
 						<Card color='blue' ref={reviewRef} className={styles.reviews}>
 							{reviews}
-							<ReviewForm productId={product._id} />
+							<ReviewForm isReviewOpened={isReviewOpened} productId={product._id} />
 						</Card>
 					</motion.div>
 				</div>

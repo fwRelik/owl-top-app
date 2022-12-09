@@ -7,7 +7,6 @@ import cn from 'classnames';
 import styles from './Search.module.scss';
 import SearchIcon from '../../public/icons/search.svg';
 
-
 export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
 	const [search, setSearch] = useState<string>('');
 	const router = useRouter();

@@ -4,6 +4,10 @@
 	margin-top: 30px;
 	padding: 30px;
 
+	&>* {
+		outline: red;		
+	}
+
 	.logo {
 		grid-column: start / logoend;
 		grid-row: 1 / span 2;
@@ -55,7 +59,7 @@
 		}
 
 		.advantages {
-			border-left: 3px solid var(--green);
+			border-left: 3px solid var(--advantages-green);
 			padding-left: 15px;
 			margin-bottom: 20px;
 		}

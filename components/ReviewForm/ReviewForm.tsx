@@ -12,7 +12,7 @@ import cn from 'classnames';
 import styles from './ReviewForm.module.scss';
 import XmarkIcon from '../../public/icons/xmark.svg';
 
-export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Element => {
+export const ReviewForm = ({ productId, isReviewOpened = false, className }: ReviewFormProps): JSX.Element => {
 	const { success, failed } = responseConfig; // getting responses from config file
 	const {
 		register,
@@ -23,6 +23,8 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 	} = useForm<IReviewForm>();
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
+
+	const accessibility = (): number => (isReviewOpened ? 0 : -1);
 
 	const onSubmit = async (formData: IReviewForm) => {
 		try {
@@ -62,12 +64,14 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 					{...register('name', formConfig.name)}
 					error={errors.name}
 					placeholder={'Имя'}
+					tabIndex={accessibility()}
 					className={cn(styles.input, styles.name)}
 				/>
 				<Input
 					{...register('title', formConfig.title)}
 					error={errors.title}
 					placeholder={'Заголовок отзыва'}
+					tabIndex={accessibility()}
 					className={cn(styles.input, styles.title)}
 				/>
 				<div className={styles.rating}>
@@ -77,7 +81,13 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 						name='rating'
 						rules={formConfig.rating}
 						render={({ field: { value, ref, onChange } }) => (
-							<Rating isEditable rating={value} ref={ref} error={errors.rating} setRating={onChange} />
+							<Rating
+								isEditable={isReviewOpened}
+								rating={value}
+								ref={ref}
+								error={errors.rating}
+								setRating={onChange}
+							/>
 						)}
 					/>
 				</div>
@@ -85,10 +95,11 @@ export const ReviewForm = ({ productId, className }: ReviewFormProps): JSX.Eleme
 					{...register('description', formConfig.description)}
 					error={errors.description}
 					placeholder={'Текст отзыва'}
+					tabIndex={accessibility()}
 					className={styles.description}
 				/>
 				<div className={styles.submit}>
-					<Button className={styles.button} appearance='primary'>
+					<Button tabIndex={accessibility()} className={styles.button} appearance='primary'>
 						Отправить
 					</Button>
 					<span>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
