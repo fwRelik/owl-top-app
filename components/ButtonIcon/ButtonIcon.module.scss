@@ -17,6 +17,10 @@
 	&.primary {
 		background-color: var(--primary);
 
+		&:hover {
+			background-color: var(--primary-hover);
+		}
+
 		svg {
 			fill: var(--white);
 		}
@@ -24,6 +28,14 @@
 
 	&.white {
 		background-color: var(--white);
+
+		&:hover {
+			background-color: var(--primary);
+
+			svg {
+				fill: var(--white);
+			}
+		}
 
 		svg {
 			fill: var(--primary);

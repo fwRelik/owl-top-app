@@ -1,0 +1,22 @@
+.header {
+	display: grid;
+	grid-template-columns: 1fr 40px;
+	gap: 10px;
+	margin: 15px;
+
+	.mobileMenu {
+		position: fixed;
+		padding: 15px;
+		z-index: 100;
+		background: var(--cultured);
+		inset: 0;
+		overflow: scroll;
+
+        .menuClose {
+            position: fixed;
+            z-index: 110;
+            top: 15px;
+            right: 15px;
+        }
+	}
+}

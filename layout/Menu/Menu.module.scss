@@ -30,6 +30,10 @@
 		font-weight: 300;
 		font-size: 12px;
 		line-height: 16px;
+
+		.notSelect {
+			pointer-events: none;
+		}
 	}
 
 	.secondLevelBlock {
@@ -56,6 +60,22 @@
 		&:hover,
 		&.thirdLevelActive {
 			color: var(--primary);
+		}
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.menu {
+		.firstLevel {
+			font-size: 22px;
+		}
+
+		.secondLevel {
+			font-size: 18px;
+		}
+
+		.thirdLevel {
+			font-size: 18px;
 		}
 	}
 }

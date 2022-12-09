@@ -69,7 +69,7 @@ export const Menu = (): JSX.Element => {
 					return (
 						<div key={m._id.secondCategory}>
 							<div className={styles.secondLevel} onClick={() => openSecondLevel(m._id.secondCategory)}>
-								{m._id.secondCategory}
+								<span className={styles.notSelect}>{m._id.secondCategory}</span>
 							</div>
 							<motion.div
 								layout

@@ -1,6 +1,4 @@
 .wrapper {
-	margin: 40px 0;
-
 	.title {
 		display: grid;
 		grid-template-columns: auto 1fr auto;
@@ -34,12 +32,22 @@
 			line-height: 27px;
 		}
 	}
+
+	.skillsTitle {
+		margin-bottom: 10px;
+	}
 }
 
 @media screen and (max-width: 640px) {
 	.wrapper {
+		margin: 10px 0;
+
 		.title {
 			grid-template-columns: auto 1fr;
+			.sort {
+				grid-column: 1/3;
+			}
 		}
+
 	}
 }

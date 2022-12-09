@@ -31,7 +31,7 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 						{products.length}
 					</Tag>
 				)}
-				<Sort sort={sort} setSort={setSort} />
+				<Sort className={styles.sort} sort={sort} setSort={setSort} />
 			</div>
 			<div>{sortedProducts && sortedProducts.map(p => <Product layout key={p._id} product={p} />)}</div>
 			<div className={styles.hhTitle}>
@@ -48,7 +48,7 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 				</>
 			)}
 			{page.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{ __html: page.seoText }} />}
-			<Htag tag='h2'>Получаемые навыки</Htag>
+			<Htag className={styles.skillsTitle} tag='h2'>Получаемые навыки</Htag>
 			{page.tags.map(t => (
 				<Tag key={t} color='primary'>
 					{t}
