@@ -11,6 +11,7 @@ import { API, formConfig, responseConfig } from '../../configs';
 import cn from 'classnames';
 import styles from './ReviewForm.module.scss';
 import XmarkIcon from '../../public/icons/xmark.svg';
+import { useKeyDownEvent } from '../../hooks/useKeyDownEvent';
 
 export const ReviewForm = ({
 	productId,
@@ -29,6 +30,7 @@ export const ReviewForm = ({
 	} = useForm<IReviewForm>();
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
+	const { skipDefEvent } = useKeyDownEvent();
 
 	const accessibility = (): number => (isReviewOpened ? 0 : -1);
 
@@ -50,16 +52,20 @@ export const ReviewForm = ({
 	};
 
 	const requestMessage = isSuccess ? (
-		<div className={cn(styles.statusMessage, styles.success)}>
+		<div className={cn(styles.statusMessage, styles.success)} role={'alert'}>
 			<div className={styles.title}>{success.title}</div>
-			<div>{success.description}</div>
-			<XmarkIcon className={styles.close} onClick={() => setIsSuccess(false)} />
+			<div> {success.description}</div>
+			<button className={styles.close} aria-label={'Закрыть оповещение'} onClick={() => setIsSuccess(false)}>
+				<XmarkIcon />
+			</button>
 		</div>
 	) : error ? (
-		<div className={cn(styles.statusMessage, styles.error)}>
+		<div className={cn(styles.statusMessage, styles.error)} role={'alert'}>
 			<div className={styles.title}>{failed.title}</div>
-			<div>{failed.description}</div>
-			<XmarkIcon className={styles.close} onClick={() => setError(undefined)} />
+			<div> {failed.description}</div>
+			<button className={styles.close} aria-label={'Закрыть оповещение'} onClick={() => setError(undefined)}>
+				<XmarkIcon />
+			</button>
 		</div>
 	) : null;
 
