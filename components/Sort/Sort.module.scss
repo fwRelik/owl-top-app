@@ -4,6 +4,10 @@
 	gap: 0px 40px;
 	align-items: center;
 
+	.sortName {
+		display: none;
+	}
+
 	button {
 		display: flex;
 		border: none;

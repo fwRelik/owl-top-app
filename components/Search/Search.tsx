@@ -33,7 +33,7 @@ export const Search = ({ className, ...props }: SearchProps): JSX.Element => {
 				onChange={e => setSearch(e.target.value)}
 				onKeyDown={handleKeyDown}
 			/>
-			<Button className={styles.button} appearance='primary' onClick={goToSearch}>
+			<Button className={styles.button} appearance='primary' onClick={goToSearch} aria-label='Искать по сайту'>
 				<SearchIcon />
 			</Button>
 		</div>
