@@ -31,7 +31,13 @@ export const Rating = forwardRef(
 						onKeyDown={(e: KeyboardEvent<HTMLSpanElement>) => {
 							handleKey(i, e);
 							skipDefEvent(e, null, 'all');
-						}}>
+						}}
+						role={isEditable ? 'slider' : ''}
+						aria-valuenow={rating}
+						aria-valuemax={5}
+						aria-valuemin={1}
+						aria-label={isEditable ? 'Укажите рейтинг' : 'рейтинг' + rating}
+						aria-invalid={error ? true : false}>
 						<StarIcon
 							className={cn(styles.star, {
 								[styles.filled]: i < currentRating,

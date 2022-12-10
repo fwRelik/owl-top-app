@@ -25,6 +25,7 @@ export const ReviewForm = ({
 		handleSubmit,
 		formState: { errors },
 		reset,
+		clearErrors,
 	} = useForm<IReviewForm>();
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [error, setError] = useState<string>();
@@ -71,6 +72,7 @@ export const ReviewForm = ({
 					placeholder={'Имя'}
 					tabIndex={accessibility()}
 					className={cn(styles.input, styles.name)}
+					aria-invalid={errors.name ? true : false}
 				/>
 				<Input
 					{...register('title', formConfig.title)}
@@ -78,6 +80,7 @@ export const ReviewForm = ({
 					placeholder={'Заголовок отзыва'}
 					tabIndex={accessibility()}
 					className={cn(styles.input, styles.title)}
+					aria-invalid={errors.title ? true : false}
 				/>
 				<div className={styles.rating}>
 					<span>Оценка:</span>
@@ -102,9 +105,15 @@ export const ReviewForm = ({
 					placeholder={'Текст отзыва'}
 					tabIndex={accessibility()}
 					className={styles.description}
+					aria-label={'Текст отзыва'}
+					aria-invalid={errors.description ? true : false}
 				/>
 				<div className={styles.submit}>
-					<Button tabIndex={accessibility()} className={styles.button} appearance='primary'>
+					<Button
+						tabIndex={accessibility()}
+						className={styles.button}
+						appearance='primary'
+						onClick={() => clearErrors()}>
 						Отправить
 					</Button>
 					<span>* Перед публикацией отзыв пройдет предварительную модерацию и проверку</span>
