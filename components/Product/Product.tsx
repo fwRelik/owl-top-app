@@ -29,6 +29,8 @@ export const Product = motion(
 					// waiting for form block to open
 					reviewRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
 				}, 100);
+
+				reviewRef.current?.focus();
 			};
 
 			const variantsCard = {
@@ -137,7 +139,7 @@ export const Product = motion(
 						</div>
 					</Card>
 					<motion.div variants={variantsCard} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
-						<Card color='blue' ref={reviewRef} className={styles.reviews}>
+						<Card color='blue' ref={reviewRef} className={styles.reviews} tabIndex={0}>
 							{reviews}
 							<ReviewForm isReviewOpened={isReviewOpened} productId={product._id} />
 						</Card>

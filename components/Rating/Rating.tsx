@@ -1,4 +1,4 @@
-import { ForwardedRef, forwardRef, KeyboardEvent, useEffect, useState } from 'react';
+import { ForwardedRef, forwardRef, KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { RatingProps } from './Rating.props';
 import styles from './Rating.module.scss';
 import cn from 'classnames';
@@ -11,6 +11,7 @@ export const Rating = forwardRef(
 		ref: ForwardedRef<HTMLDivElement>
 	): JSX.Element => {
 		const [ratingArray, setRatingArray] = useState<JSX.Element[]>(new Array(5).fill(null));
+		const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 		const { skipDefEvent } = useKeyDownEvent();
 
 		useEffect(() => {
@@ -20,21 +21,24 @@ export const Rating = forwardRef(
 		const constructRating = (currentRating: number) => {
 			const updatedArray = ratingArray.map((r: JSX.Element, i: number) => {
 				return (
-					<StarIcon
+					<span
 						key={i}
-						className={cn(styles.star, {
-							[styles.filled]: i < currentRating,
-							[styles.editable]: isEditable,
-						})}
+						ref={r => ratingArrayRef.current?.push(r)}
 						onMouseEnter={() => changeDisplay(i + 1)}
 						onMouseLeave={() => changeDisplay(rating)}
 						onClick={() => onClick(i + 1)}
 						tabIndex={isEditable ? 0 : -1}
-						onKeyDown={(e: KeyboardEvent<SVGAElement>) => {
-							handleSpace(i + 1, e);
-							skipDefEvent(e);
-						}}
-					/>
+						onKeyDown={(e: KeyboardEvent<HTMLSpanElement>) => {
+							handleKey(i, e);
+							skipDefEvent(e, null, 'all');
+						}}>
+						<StarIcon
+							className={cn(styles.star, {
+								[styles.filled]: i < currentRating,
+								[styles.editable]: isEditable,
+							})}
+						/>
+					</span>
 				);
 			});
 
@@ -49,8 +53,18 @@ export const Rating = forwardRef(
 			if (isEditable && typeof setRating === 'function') setRating(i);
 		};
 
-		const handleSpace = (i: number, e: KeyboardEvent<SVGAElement>) => {
-			if (e.code === 'Space' && typeof setRating === 'function') setRating(i);
+		const handleKey = (i: number, e: KeyboardEvent<HTMLSpanElement>) => {
+			if (typeof setRating != 'function') return;
+			if (e.code == 'Space') setRating(++i);
+
+			if (e.code == 'ArrowRight' || e.code == 'ArrowUp') {
+				setRating(i < 5 ? i + 2 : 5);
+				ratingArrayRef.current[++i]?.focus();
+			}
+			if (e.code == 'ArrowLeft' || e.code == 'ArrowDown') {
+				setRating(i > 1 ? i : 1);
+				ratingArrayRef.current[--i]?.focus();
+			}
 		};
 
 		return (
