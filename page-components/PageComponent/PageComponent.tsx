@@ -5,12 +5,14 @@ import { useEffect, useReducer } from 'react';
 import { sortReducer } from './sort.reducer';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import styles from './PageComponent.module.scss';
+import { useReducedMotion } from 'framer-motion';
 
 export const PageComponent = ({ page, products, firstCategory }: PageComponentProps): JSX.Element => {
 	const [{ products: sortedProducts, sort }, dispathSort] = useReducer(sortReducer, {
 		products,
 		sort: SortEnum.Rating,
 	});
+	const shouldReduceMotion = useReducedMotion();
 
 	if (!page) return <div>Not Found Error...</div>; // crutch for temporary complete assembly
 
@@ -35,7 +37,9 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 			</div>
 			<div role={'list'}>
 				{sortedProducts &&
-					sortedProducts.map(p => <Product role={'listitem'} layout key={p._id} product={p} />)}
+					sortedProducts.map(p => (
+						<Product role={'listitem'} layout={shouldReduceMotion ? false : true} key={p._id} product={p} />
+					))}
 			</div>
 			<div className={styles.hhTitle}>
 				<Htag tag='h2'>Вакансии - {page.category}</Htag>

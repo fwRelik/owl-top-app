@@ -6,7 +6,7 @@ import { FirstLevelMenuItem, PageItem } from '../../interfaces/menu.interface';
 import { firstLevelMenu } from '../../helpers/helpers';
 import cn from 'classnames';
 import styles from './Menu.module.scss';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useKeyDownEvent } from '../../hooks/useKeyDownEvent';
 
 export const Menu = (): JSX.Element => {
@@ -14,14 +14,17 @@ export const Menu = (): JSX.Element => {
 	const { menu, setMenu, firstCategory } = useContext(AppContext);
 	const router = useRouter();
 	const { skipDefEvent } = useKeyDownEvent();
+	const shouldReduceMotion = useReducedMotion();
 
 	const variants = {
 		visible: {
 			marginBottom: 10,
-			transition: {
-				when: 'beforeChildren',
-				staggerChildren: 0.1,
-			},
+			transition: shouldReduceMotion
+				? {}
+				: {
+						when: 'beforeChildren',
+						staggerChildren: 0.1,
+				  },
 		},
 		hidden: {
 			marginBottom: 0,
