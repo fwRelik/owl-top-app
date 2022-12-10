@@ -139,7 +139,11 @@ export const Product = motion(
 						</div>
 					</Card>
 					<motion.div variants={variantsCard} initial={'close'} animate={isReviewOpened ? 'open' : 'close'}>
-						<Card color='blue' ref={reviewRef} className={styles.reviews} tabIndex={0}>
+						<Card
+							color='blue'
+							ref={reviewRef}
+							className={styles.reviews}
+							tabIndex={isReviewOpened ? 0 : -1}>
 							{reviews}
 							<ReviewForm isReviewOpened={isReviewOpened} productId={product._id} />
 						</Card>

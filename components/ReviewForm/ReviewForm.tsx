@@ -12,7 +12,12 @@ import cn from 'classnames';
 import styles from './ReviewForm.module.scss';
 import XmarkIcon from '../../public/icons/xmark.svg';
 
-export const ReviewForm = ({ productId, isReviewOpened = false, className }: ReviewFormProps): JSX.Element => {
+export const ReviewForm = ({
+	productId,
+	isReviewOpened = false,
+	className,
+	...props
+}: ReviewFormProps): JSX.Element => {
 	const { success, failed } = responseConfig; // getting responses from config file
 	const {
 		register,
@@ -58,7 +63,7 @@ export const ReviewForm = ({ productId, isReviewOpened = false, className }: Rev
 	) : null;
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} {...props}>
 			<div className={cn(styles.reviewForm, className)}>
 				<Input
 					{...register('name', formConfig.name)}
