@@ -4,9 +4,12 @@
 	gap: 0px 40px;
 	align-items: center;
 
-	span {
+	button {
 		display: flex;
+		border: none;
+		background: none;
 		cursor: pointer;
+		font-size: 16px;
 
 		.sortIcon {
 			display: none;
