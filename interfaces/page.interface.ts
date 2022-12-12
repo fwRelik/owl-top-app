@@ -29,6 +29,8 @@ export interface PageModel {
 	category: string;
 	advantages?: PageAdvantage[];
 	seoText?: string;
+	seoTitle?: string;
+	seoDescription?: string;
 	tagsTitle: string;
 	tags: string[];
 	createdAt: Date;

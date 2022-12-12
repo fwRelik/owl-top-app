@@ -8,9 +8,31 @@ import { PageModel, TopLevelCategory } from '../../interfaces/page.interface';
 import { ProductModel } from '../../interfaces/product.interface';
 import { withLayout } from '../../layout/Layout';
 import { PageComponent } from '../../page-components';
+import Head from 'next/head';
+import { pageConfig } from '../../configs';
 
 function Page({ firstCategory, page, products }: CourseProps): JSX.Element {
-	return <PageComponent firstCategory={firstCategory} page={page} products={products} />;
+	const seoTitle = page.seoTitle ?? pageConfig.title;
+	const seoDescription = page.seoDescription ?? pageConfig.description;
+
+	return (
+		<>
+			<Head>
+				<title>{seoTitle}</title>
+				<meta name='title' content={seoTitle} />
+				<meta name='description' content={seoDescription} />
+
+				<meta property='og:type' content='article' />
+				<meta property='og:title' content={seoTitle} />
+				<meta property='og:description' content={seoDescription} />
+
+				<meta property='twitter:card' content='summary_large_image' />
+				<meta property='twitter:title' content={seoTitle} />
+				<meta property='twitter:description' content={seoDescription} />
+			</Head>
+			<PageComponent firstCategory={firstCategory} page={page} products={products} />
+		</>
+	);
 }
 
 export default withLayout(Page);
