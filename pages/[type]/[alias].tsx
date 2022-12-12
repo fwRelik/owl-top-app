@@ -17,20 +17,24 @@ function Page({ firstCategory, page, products }: CourseProps): JSX.Element {
 
 	return (
 		<>
-			<Head>
-				<title>{seoTitle}</title>
-				<meta name='title' content={seoTitle} />
-				<meta name='description' content={seoDescription} />
+			{page && products && (
+				<>
+					<Head>
+						<title>{seoTitle}</title>
+						<meta name='title' content={seoTitle} />
+						<meta name='description' content={seoDescription} />
 
-				<meta property='og:type' content='article' />
-				<meta property='og:title' content={seoTitle} />
-				<meta property='og:description' content={seoDescription} />
+						<meta property='og:type' content='article' />
+						<meta property='og:title' content={seoTitle} />
+						<meta property='og:description' content={seoDescription} />
 
-				<meta property='twitter:card' content='summary_large_image' />
-				<meta property='twitter:title' content={seoTitle} />
-				<meta property='twitter:description' content={seoDescription} />
-			</Head>
-			<PageComponent firstCategory={firstCategory} page={page} products={products} />
+						<meta property='twitter:card' content='summary_large_image' />
+						<meta property='twitter:title' content={seoTitle} />
+						<meta property='twitter:description' content={seoDescription} />
+					</Head>
+					<PageComponent firstCategory={firstCategory} page={page} products={products} />
+				</>
+			)}
 		</>
 	);
 }

@@ -14,8 +14,6 @@ export const PageComponent = ({ page, products, firstCategory }: PageComponentPr
 	});
 	const shouldReduceMotion = useReducedMotion();
 
-	if (!page) return <div>Not Found Error...</div>; // crutch for temporary complete assembly
-
 	useEffect(() => {
 		dispathSort({ type: 'reset', payload: products });
 	}, [page]);
