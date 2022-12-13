@@ -10,31 +10,30 @@ import { withLayout } from '../../layout/Layout';
 import { PageComponent } from '../../page-components';
 import Head from 'next/head';
 import { pageConfig } from '../../configs';
+import { Error404 } from '../404';
 
 function Page({ firstCategory, page, products }: CourseProps): JSX.Element {
+	if (!(page && products)) return <Error404 />;
+
 	const seoTitle = page.seoTitle ?? pageConfig.title;
 	const seoDescription = page.seoDescription ?? pageConfig.description;
 
 	return (
 		<>
-			{page && products && (
-				<>
-					<Head>
-						<title>{seoTitle}</title>
-						<meta name='title' content={seoTitle} />
-						<meta name='description' content={seoDescription} />
+			<Head>
+				<title>{seoTitle}</title>
+				<meta name='title' content={seoTitle} />
+				<meta name='description' content={seoDescription} />
 
-						<meta property='og:type' content='article' />
-						<meta property='og:title' content={seoTitle} />
-						<meta property='og:description' content={seoDescription} />
+				<meta property='og:type' content='article' />
+				<meta property='og:title' content={seoTitle} />
+				<meta property='og:description' content={seoDescription} />
 
-						<meta property='twitter:card' content='summary_large_image' />
-						<meta property='twitter:title' content={seoTitle} />
-						<meta property='twitter:description' content={seoDescription} />
-					</Head>
-					<PageComponent firstCategory={firstCategory} page={page} products={products} />
-				</>
-			)}
+				<meta property='twitter:card' content='summary_large_image' />
+				<meta property='twitter:title' content={seoTitle} />
+				<meta property='twitter:description' content={seoDescription} />
+			</Head>
+			<PageComponent firstCategory={firstCategory} page={page} products={products} />
 		</>
 	);
 }
