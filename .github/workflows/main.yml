@@ -40,6 +40,7 @@ jobs:
               uses: docker/build-push-action@v3
               with:
                   push: true
-                  tags: ${{ env.IMAGE_NAME }}:develop
+                  tags: ${{ steps.meta.outputs.tags }}
+                  labels: ${{ steps.meta.outputs.labels }}
                   secrets: |
                       "ENV_DOMAIN_FILE=${{secrets.ENV_DOMAIN_FILE}}"
