@@ -1,8 +1,7 @@
 version: '3'
 services:
-    app:
+    owl-top-app:
         image: owl-top-app
-        container_name: owl-top-app-container
         restart: always
         ports:
             - 3001:3001
