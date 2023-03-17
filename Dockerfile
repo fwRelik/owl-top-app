@@ -6,9 +6,8 @@ ADD . .
 
 # For only git actions
 RUN --mount=type=secret,id=ENV_DOMAIN_FILE \
-  cat /run/secrets/ENV_DOMAIN_FILE >> .env.production || echo 'bypass'
+  cat /run/secrets/ENV_DOMAIN_FILE >> .env.local || echo 'bypass'
 
-ENV NODE_ENV production
 RUN npm run build
 RUN npm prune --production
 CMD ["npm", "start"]
