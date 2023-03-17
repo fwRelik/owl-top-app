@@ -1,7 +1,8 @@
 version: '3'
 services:
-    owl-top-app:
-        image: owl-top-app
-        restart: always
-        ports:
-            - 3001:3001
+  app:
+    image: ghcr.io/fwrelik/owl-top-app:main
+    container_name: owl-top-app
+    restart: always
+    ports:
+      - 3001:3001

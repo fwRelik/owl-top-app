@@ -1,46 +1,46 @@
 name: owl-top-app-actions
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 env:
-    IMAGE_NAME: fwrelik/owl-top-app
+  IMAGE_NAME: fwrelik/owl-top-app
 
 jobs:
-    build_and_publish:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-            - name: Log in to Docker Hub
-              uses: docker/login-action@v2
-              with:
-                  username: ${{ secrets.DOCKER_USERNAME }}
-                  password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-            - name: Log in to the Container registry
-              uses: docker/login-action@v2
-              with:
-                  registry: ghcr.io
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Extract metadata (tags, labels) for Docker
-              id: meta
-              uses: docker/metadata-action@v4
-              with:
-                  images: |
-                      ${{ env.IMAGE_NAME }}
-                      ghcr.io/${{ github.repository }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ${{ env.IMAGE_NAME }}
+            ghcr.io/${{ github.repository }}
 
-            - name: Build and push Docker image
-              uses: docker/build-push-action@v3
-              with:
-                  push: true
-                  tags: ${{ steps.meta.outputs.tags }}
-                  labels: ${{ steps.meta.outputs.labels }}
-                  secrets: |
-                      "ENV_DOMAIN_FILE=${{secrets.ENV_DOMAIN_FILE}}"
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          secrets: |
+            "ENV_DOMAIN_FILE=${{secrets.ENV_DOMAIN_FILE}}"
