@@ -11,6 +11,7 @@ const nextConfig = {
 				pathname: '/static/**',
 			},
 		],
+		unoptimized: true
 	},
 	webpack(config) {
 		config.module.rules.push({
